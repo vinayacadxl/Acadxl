@@ -1,0 +1,143 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a467f9, #520589); /* Purple gradient */
+}
+
+.form-title-image {
+    width: 100%;
+    max-width: 300px;  /* Adjust the size as needed */
+    margin-bottom: -42px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: left;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+input, textarea, select, button {
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #f9f9f9; /* Soft background for inputs */
+    color: #333;
+    box-sizing: border-box; /* To ensure padding doesn't overflow */
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #5300ac; /* Green border on focus */
+    background-color: #fff;
+}
+
+button {
+    background-color: #650cd9; /* Green button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    padding: 14px; /* Ensure button looks good on smaller screens */
+}
+
+button:hover {
+    background-color: #6b3eff; /* Darker green on hover */
+}
+
+button:disabled {
+    background-color: #cccccc; /* Gray background when disabled */
+    cursor: not-allowed;
+}
+
+#confirmation {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #4CAF50; /* Green text for success message */
+    font-weight: 500;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #bbb;
+    font-style: italic;
+}
+
+select {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+select:focus {
+    outline: none;
+    border-color: #3a0462;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+        width: 90%;
+        max-width: 420px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input, textarea, select, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 15px;
+        width: 90%;
+        max-width: 350px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input, textarea, select, button {
+        font-size: 12px;
+        padding: 10px; /* Adjust padding to maintain appearance on small screens */
+    }
+}

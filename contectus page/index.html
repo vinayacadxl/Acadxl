@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="form-container">
+    <!-- Image instead of title -->
+    <img src="./image/heading.png" alt="Form Title" class="form-title-image">
+
+    <form id="dataForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="number">Number:</label>
+      <input type="tel" id="number" name="number" placeholder="Enter your phone number" required>
+
+      <label for="class">Class:</label>
+      <select id="class" name="class" required>
+        <option value="">Select your class</option>
+        <option value="10th">10th</option>
+        <option value="11th">11th</option>
+        <option value="12th">12th</option>
+        <option value="other">Other</option>
+      </select>
+
+
+
+      <button type="submit" id="submitButton">Submit</button>
+    </form>
+    <div id="confirmation"></div>
+  </div>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA71B2rE5dp3g4VO6XK7QlpBYzBpSTenk0",
+      authDomain: "boardxl.firebaseapp.com",
+      databaseURL: "https://boardxl-default-rtdb.firebaseio.com/", // Add your database URL here
+      projectId: "boardxl",
+      storageBucket: "boardxl.firebasestorage.app",
+      messagingSenderId: "351638882918",
+      appId: "1:351638882918:web:aa8850e45939564cf77ba7"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+  
+    // Form submission logic
+    document.getElementById('dataForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form from refreshing the page
+  
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const number = document.getElementById('number').value;
+      const className = document.getElementById('class').value;
+      const message = document.getElementById('message').value;
+  
+      // Save data to Firebase Realtime Database
+      const submissionsRef = ref(database, 'submissions');
+      const newSubmissionRef = push(submissionsRef);
+      set(newSubmissionRef, {
+        name,
+        email,
+        number,
+        class: className,
+        message,
+        submittedAt: new Date().toISOString()
+      })
+      .then(() => {
+        // Show confirmation
+        document.getElementById('confirmation').innerText = "Your details have been submitted successfully!";
+        
+        // Change the button text to 'Submitted'
+        const submitButton = document.getElementById('submitButton');
+        submitButton.innerText = 'Submitted';
+        
+        // Disable the submit button to prevent further submissions
+        submitButton.disabled = true;
+        
+        // Optionally, reset the form after submission
+        document.getElementById('dataForm').reset();
+      })
+      .catch((error) => {
+        console.error("Error submitting data: ", error);
+        document.getElementById('confirmation').innerText = "There was an error submitting your details. Please try again.";
+      });
+    });
+  </script>
+</body>
+</html>
